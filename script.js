@@ -10,6 +10,17 @@ function generateVerse() {
   verseBox.textContent = randomVerse;
 }
 
+function loadVersum() {
+  fetch('versum.txt')
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("versumBox").textContent = text;
+    })
+    .catch(error => {
+      document.getElementById("versumBox").textContent = "Kunde inte ladda versum.txt.";
+    });
+}
+
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 

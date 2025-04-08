@@ -1,17 +1,17 @@
-#  Edwins Poesi
+# 🌌 Edwins Poesi
 
 En poetisk och rituell webbsida med stjärnflöde, versgenerator och mystisk känsla.  
 Skapad med HTML, CSS och JavaScript – helt gratis hostad via GitHub Pages.
 
 ---
 
-##  Live Demo
+## 🔮 Live Demo
 
 👉 [https://kiwing94.github.io/edwin-poesi-sida/](https://kiwing94.github.io/edwin-poesi-sida/) *(aktivera Pages under Settings > Pages)*
 
 ---
 
-##  Innehåll
+## 📦 Innehåll
 
 - `index.html` – Grundstruktur och innehåll
 - `style.css` – Design med rituell och mystisk ton
@@ -20,18 +20,18 @@ Skapad med HTML, CSS och JavaScript – helt gratis hostad via GitHub Pages.
 
 ---
 
-##  Publicera sidan
+## ⚙️ Publicera sidan
 
 1. Gå till repo: `Settings > Pages`
 2. Välj **Source: `Deploy from a branch`**
 3. Välj **Branch: `main`** och **Folder: `/ (root)`**
 4. Klicka **Save**
 5. Din webbsida finns nu på:  
-  `https://kiwing94.github.io/edwin-poesi-sida/`
+   `https://kiwing94.github.io/edwin-poesi-sida/`
 
 ---
 
-##  Funktioner
+## 🧪 Funktioner
 
 - 🌠 Interaktiv stjärnbakgrund (canvas-animation)
 - 🪶 Versum Fluxus-generator med slumpade dikter
@@ -40,7 +40,7 @@ Skapad med HTML, CSS och JavaScript – helt gratis hostad via GitHub Pages.
 
 ---
 
-##  Kontakt
+## ✍️ Kontakt
 
 > kiwing94@hotmail.com  
-> Byggd av Edwin
+> Byggd  av Edwin
