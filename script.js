@@ -1,7 +1,8 @@
+
 const verses = [
-  "Flytande eld,\nvirvlande kod,\nrunor i mörkret,\nsjunger i pulser.\nDiktens skepp,\ntranscenderar tid,\nrör sig i tystnad.",
-  "Sumeriskt ljus,\nstrålande namn,\nsjälar i kretslopp,\ntoner från djupet.\nEvig flöde,\nmellan språk,\nbortom formernas kant.",
-  "Flödesmagi,\nverser som vakar,\nmellan världar,\nklingar symboler.\nInom ritual,\nbindas kod,\ntill sångens hjärta."
+  "Floating fire,\nspiraling code,\nrunes in the dark,\nsinging in pulses.\nThe ship of verse,\ntranscends time,\nmoves in silence.",
+  "Sumerian light,\nshining names,\nsouls in cycles,\ntones from the deep.\nEternal flow,\nbetween tongues,\nbeyond the edge of form.",
+  "Fluxus magic,\nverses watching,\nbetween worlds,\nsymbols ringing.\nWithin the rite,\ncode is bound,\nto the song’s core."
 ];
 
 function generateVerse() {
@@ -17,10 +18,23 @@ function loadVersum() {
       document.getElementById("versumBox").textContent = text;
     })
     .catch(error => {
-      document.getElementById("versumBox").textContent = "Kunde inte ladda versum.txt.";
+      document.getElementById("versumBox").textContent = "Could not load versum.txt.";
     });
 }
 
+// Load a list of files from the "fluxus" folder (assumes static files named fluxus1.txt, fluxus2.txt, etc.)
+function loadFluxusFile(filename) {
+  fetch('fluxus/' + filename)
+    .then(response => response.text())
+    .then(text => {
+      document.getElementById("fluxusBox").textContent = text;
+    })
+    .catch(error => {
+      document.getElementById("fluxusBox").textContent = "Could not load file: " + filename;
+    });
+}
+
+// STARFIELD
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
@@ -54,3 +68,28 @@ function animateStars() {
   requestAnimationFrame(animateStars);
 }
 animateStars();
+
+// THEME SWITCHER
+function switchTheme(theme) {
+  const root = document.documentElement;
+
+  if (theme === 'sun') {
+    root.style.setProperty('--bg-color', '#fff8e7');
+    root.style.setProperty('--text-color', '#2c2c2c');
+    root.style.setProperty('--accent-color', '#ff9900');
+    root.style.setProperty('--box-bg', '#fffdf7');
+    root.style.setProperty('--box-shadow', '0 0 10px #ffcc77aa');
+  } else if (theme === 'dark') {
+    root.style.setProperty('--bg-color', '#000');
+    root.style.setProperty('--text-color', '#e6e6e6');
+    root.style.setProperty('--accent-color', '#ffd700');
+    root.style.setProperty('--box-bg', '#111');
+    root.style.setProperty('--box-shadow', '0 0 12px #ffd70055');
+  } else if (theme === 'temple') {
+    root.style.setProperty('--bg-color', '#0e1a1a');
+    root.style.setProperty('--text-color', '#d0ffd6');
+    root.style.setProperty('--accent-color', '#a2ffcc');
+    root.style.setProperty('--box-bg', '#112222');
+    root.style.setProperty('--box-shadow', '0 0 12px #00ffaa55');
+  }
+}
