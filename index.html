@@ -1,141 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Proto Prosodie</title>
+  <meta charset="UTF-8">
+  <title>Kiwing.org — Diktens Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    :root {
+      --lila: #6a0572;
+      --rosa: #ff6f61;
+      --bakgrund: linear-gradient(to right, #e0f7fa, #f3e5f5);
+    }
+
     body {
-      background-color: #121212;
-      color: #e0e0e0;
-      font-family: Georgia, serif;
-      padding: 2rem;
       margin: 0;
+      font-family: 'Georgia', serif;
+      background: var(--bakgrund);
+      color: #3e2f5b;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(to right, var(--lila), #ab47bc);
+      color: white;
+      padding: 80px 20px 40px;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
-      font-size: 3rem;
-      margin-top: 2rem;
-      letter-spacing: 0.1rem;
-      color: #f5f5f5;
+      font-size: 3.5em;
+      animation: glow 3s infinite alternate;
     }
 
-    .subtitle {
-      text-align: center;
-      font-size: 1.3rem;
-      color: #999;
-      margin-bottom: 3rem;
-      font-style: italic;
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #ede7f6;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    #poemArea {
-      width: 100%;
-      height: 60vh;
-      font-size: 1.4rem;
-      padding: 1rem;
-      background-color: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 10px;
-      color: #fff;
-      resize: vertical;
-    }
-
-    .controls, .buttons {
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    .controls input[type="color"],
-    .controls input[type="range"] {
-      margin: 0 0.5rem;
-    }
-
-    label {
-      color: #ccc;
-    }
-
-    button {
-      background-color: #333;
-      color: #eee;
-      border: none;
-      padding: 0.6rem 1rem;
-      margin: 0.3rem;
+    nav a {
+      text-decoration: none;
+      color: var(--lila);
+      font-weight: bold;
+      padding: 8px 15px;
       border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s;
     }
 
-    button:hover {
-      background-color: #444;
+    nav a:hover {
+      background-color: var(--lila);
+      color: white;
+    }
+
+    section {
+      padding: 80px 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    section:nth-of-type(2) { animation-delay: 0.3s; }
+    section:nth-of-type(3) { animation-delay: 0.6s; }
+    section:nth-of-type(4) { animation-delay: 0.9s; }
+
+    .quote {
+      font-style: italic;
+      font-size: 1.6em;
+      color: #4a148c;
+      margin: 30px auto;
+      max-width: 700px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: var(--rosa);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background: #d84315;
+    }
+
+    footer {
+      background: #ede7f6;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: var(--lila);
+    }
+
+    .butterfly {
+      font-size: 40px;
+      position: absolute;
+      top: 100px;
+      left: -100px;
+      animation: flyAcross 14s linear infinite;
+    }
+
+    /* Effekter */
+    @keyframes glow {
+      from { text-shadow: 0 0 5px white; }
+      to   { text-shadow: 0 0 20px #ff80ab; }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes flyAcross {
+      0%   { transform: translateX(0) rotate(0deg); }
+      50%  { transform: translateX(800px) rotate(15deg); }
+      100% { transform: translateX(1600px) rotate(-10deg); }
     }
   </style>
 </head>
 <body>
 
-  <h1>Proto Prosodie</h1>
-  <div class="subtitle">– The first rhythm, the breath of language –</div>
+  <header>
+    <h1>Välkommen till Kiwing.org</h1>
+    <p>Där poesi får andas. Ord lyfter. Och du får vara fri.</p>
+  </header>
 
-  <textarea id="poemArea" placeholder="Write your poem here... let it breathe."></textarea>
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#dikt">Diktens Magi</a>
+    <a href="#projekt">Projekt</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
 
-  <div class="controls">
-    <label for="colorPicker">Text color:</label>
-    <input type="color" id="colorPicker" value="#ffffff" />
+  <div class="butterfly">🦋</div>
 
-    <label for="fontSize">Font size:</label>
-    <input type="range" id="fontSize" min="14" max="40" value="22" />
-  </div>
+  <section id="intro">
+    <h2>Intro</h2>
+    <p>Kiwing är inte bara ett namn. Det är en röst som flödar över skärmens kant.</p>
+    <div class="quote">"Allting jag skriver, skriver mig tillbaka."</div>
+  </section>
 
-  <div class="buttons">
-    <button onclick="countSyllables()">Count Syllables</button>
-    <button onclick="analyzeMeter()">Analyze Meter</button>
-    <button onclick="clearText()">Clear Text</button>
-    <button onclick="exportPoem()">Export Poem</button>
-  </div>
+  <section id="dikt">
+    <h2>Diktens Magi</h2>
+    <p>Här formas orden utan gränser. Interaktiva verser, levande rader, symboliska ritualer.</p>
+    <a href="hemlig.html" class="btn">🕊 Utforska dikten</a>
+  </section>
 
-  <script>
-    const poemArea = document.getElementById("poemArea");
-    const colorPicker = document.getElementById("colorPicker");
-    const fontSize = document.getElementById("fontSize");
+  <section id="projekt">
+    <h2>Projekt</h2>
+    <p>Plattformar. Kod. Översättare. Poetanalyser. Allt föds ur denna kreativa källa.</p>
+    <a href="https://github.com/kiwing94" target="_blank" class="btn">💻 Github-profil</a>
+  </section>
 
-    colorPicker.addEventListener("input", () => {
-      poemArea.style.color = colorPicker.value;
-    });
+  <section id="kontakt">
+    <h2>Kontakt</h2>
+    <p>Vill du samarbeta, skapa eller bara skriva? Hör av dig till <b>kiwing@versum.org</b></p>
+  </section>
 
-    fontSize.addEventListener("input", () => {
-      poemArea.style.fontSize = fontSize.value + "px";
-    });
-
-    function clearText() {
-      poemArea.value = "";
-    }
-
-    function exportPoem() {
-      const blob = new Blob([poemArea.value], { type: "text/plain;charset=utf-8" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "proto_poem.txt";
-      link.click();
-    }
-
-    function countSyllables() {
-      const text = poemArea.value;
-      const lines = text.split('\n');
-      const vowelGroups = /[aeiouyåäö]+/gi;
-
-      let result = lines.map(line => {
-        const syllables = (line.match(vowelGroups) || []).length;
-        return `Line: "${line.trim()}" – ${syllables} syllable(s)`;
-      });
-
-      alert(result.join('\n'));
-    }
-
-    function analyzeMeter() {
-      alert("Meter analysis is under development... soon rhythm shall reveal itself.");
-    }
-  </script>
+  <footer>
+    &copy; 2025 Kiwing.org | Skapat med kod, hjärta och stjärnstoft ✨
+  </footer>
 
 </body>
 </html>
