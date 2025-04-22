@@ -1,99 +1,55 @@
-// Get references to the text area and control elements
-const poemArea = document.getElementById("poemArea");
-const colorPicker = document.getElementById("colorPicker");
-const fontSize = document.getElementById("fontSize");
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const fs = require('fs');
 
-// Change text color based on user input
-colorPicker.addEventListener("input", () => {
-  poemArea.style.color = colorPicker.value;
+let win;
+
+// Create the main window
+function createWindow() {
+    win = new BrowserWindow({
+        width: 1024,
+        height: 768,
+        webPreferences: {
+            nodeIntegration: true,  // Allow Node.js integration
+            contextIsolation: false,  // Disable context isolation to use ipcRenderer directly
+        }
+    });
+
+    win.loadFile('index.html');
+
+    win.on('closed', () => {
+        win = null;
+    });
+}
+
+// Listen for console command execution
+ipcMain.on('run-console-command', (event, command) => {
+    const result = executeConsoleCommand(command);  // Execute the command
+    event.reply('code-executed', result);  // Send result back to renderer
 });
 
-// Change font size based on user input
-fontSize.addEventListener("input", () => {
-  poemArea.style.fontSize = fontSize.value + "px";
-});
-
-// Function to clear the poem text area
-function clearText() {
-  poemArea.value = "";
-}
-
-// Function to export poem to a .txt file
-function exportPoem() {
-  const blob = new Blob([poemArea.value], { type: "text/plain;charset=utf-8" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "proto_poem.txt";
-  link.click();
-}
-
-// Function to analyze the poem
-function analyzePoem() {
-  // Get poem text
-  const text = poemArea.value;
-
-  // Split poem into lines
-  const lines = text.split('\n');
-
-  // Analyze meter (scansion)
-  analyzeMeter(lines);
-
-  // Analyze syllables
-  countSyllables(lines);
-
-  // Analyze rhyme pattern
-  analyzeRhyme(lines);
-}
-
-// Function to count syllables in each line
-function countSyllables(lines) {
-  const vowelGroups = /[aeiouyåäö]+/gi;
-
-  let syllableCount = lines.map(line => {
-    const syllables = (line.match(vowelGroups) || []).length;
-    return `Line: "${line.trim()}" – ${syllables} syllable(s)`;
-  });
-
-  alert(syllableCount.join('\n'));
-}
-
-// Function to analyze meter (scansion)
-function analyzeMeter(lines) {
-  const meterPattern = lines.map(line => {
-    const syllables = line.match(/[aeiouyåäö]+/gi); // Match syllables
-    const stressPattern = syllables ? syllables.map((syl, index) => {
-      return (index % 2 === 0) ? '˘' : '´';  // Alternate basic stress
-    }).join(' ') : '';
-
-    let meterType = 'Unknown';
-    if (stressPattern.match(/˘´/g)) {
-      meterType = 'Iambic (˘´)';
-    } else if (stressPattern.match(/´˘/g)) {
-      meterType = 'Trochaic (´˘)';
-    } else if (stressPattern.match(/´˘˘/g)) {
-      meterType = 'Dactylic (´˘˘)';
-    } else if (stressPattern.match(/˘˘´/g)) {
-      meterType = 'Anapestic (˘˘´)';
+// Simulated command execution (for now, just output the command)
+function executeConsoleCommand(command) {
+    try {
+        // Here, you can implement a real interpreter for Prosodie++ commands
+        console.log("Executing command: ", command);
+        return `Executed Command: ${command}`;  // Simulate success
+    } catch (err) {
+        return `Error: ${err.message}`;
     }
-
-    return `${line.trim()} -> ${meterType}: ${stressPattern}`;
-  });
-
-  alert(meterPattern.join('\n'));
 }
 
-// Function to analyze rhyme pattern (simplified)
-function analyzeRhyme(lines) {
-  const lastWords = lines.map(line => {
-    const words = line.split(' ');
-    return words[words.length - 1].toLowerCase();  // Get the last word of each line
-  });
+app.whenReady().then(createWindow);
 
-  let rhymePattern = '';
-  lastWords.forEach((word, index) => {
-    rhymePattern += word.match(/[aeiouyåäö]+$/gi) ? 'A' : 'B';  // Basic rhyme check
-    if (index < lastWords.length - 1) rhymePattern += '-';
-  });
+// Quit the app when all windows are closed (except on macOS)
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
 
-  alert("Rhyme Pattern: " + rhymePattern);
-}
+app.on('activate', () => {
+    if (win === null) {
+        createWindow();
+    }
+});

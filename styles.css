@@ -1,0 +1,70 @@
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #1d1d1d;
+}
+
+header h1 {
+    color: #ffb400;
+    font-size: 2rem;
+}
+
+/* Monaco Editor */
+#editor-container {
+    width: 80%;
+    height: 400px;
+    margin-top: 20px;
+}
+
+/* Control Buttons */
+#controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.control-btn {
+    background-color: #2e3b4e;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #4b5b6e;
+}
+
+/* Console Output */
+#console-output {
+    width: 80%;
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#console-text {
+    font-family: 'Courier New', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: #b0b0b0;
+}

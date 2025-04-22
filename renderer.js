@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+
 // Get elements from the DOM
 const codeEditor = document.getElementById('code-editor');
 const consoleText = document.getElementById('console-text');
@@ -7,8 +10,6 @@ const clearConsoleButton = document.getElementById('clear-console');
 // Function to execute Prosodie++ commands from the editor
 function executeCode() {
     const code = codeEditor.value.trim();
-    
-    // Display input in the console output with pulsating effect
     consoleText.innerHTML += `> ${code}<br/>`;
 
     // Simulate handling of Prosodie++ commands

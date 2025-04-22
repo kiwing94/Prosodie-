@@ -1,0 +1,1014 @@
+
+// --- Start of advanced_game_with_boss_fights.prs ---
+# Advanced Game with Boss Fights and Dynamic Difficulty
+
+Generate prosodie "Advanced Game with Dynamic Level System":
+    Create app called "Prosodie Adventure with Bosses"
+    Set aura to "dark"
+    Set mood to "intense"
+
+    Add section called "Game Status":
+        Label: "Game Status"
+        Display "Score: 0 | Health: 100 | Level: 1 | Timer: 60s | Boss Health: 100"
+    
+    Add section called "Game Graphics":
+        Label: "Player Position"
+        Display "Player is at (x: 0, y: 0)"
+        Display "Boss is at (x: 10, y: 10)"
+        Add graphical representation for player and boss
+
+    Add section called "Collectibles":
+        Display "Coin at (x: 2, y: 2)"
+
+    Add section called "Console Output":
+        Label: "Console"
+        Add text field for game actions (e.g., "Move Left", "Move Right", "Jump", "Attack Boss")
+
+    Add button: "Start Game"
+    Add button: "End Game"
+    Add button: "Pause Game"
+    Add button: "Attack Boss"
+
+    Add footer: "© Prosodie Game Studio"
+    Save app as html
+    Publish app to folder "game_output/"
+
+# Define actions for the buttons and game flow
+Define action "Start Game":
+    Initialize player position as (0, 0)
+    Initialize score as 0
+    Initialize health as 100
+    Initialize boss_health as 100
+    Initialize level as 1
+    Set game timer to 60 seconds
+    Display "Game Started! Move to avoid enemies and attack the boss." in console output as text.green
+    Display "Player is at (x: 0, y: 0)" in game graphics as text.white
+    Display "Boss is at (x: 10, y: 10)" in game graphics as text.red
+
+Define action "End Game":
+    Display "Game Over! Your score is [score] and you reached level [level]." in console output as text.red
+    Set "Game Status" to "Game Over"
+    Display "Player's final position: (x: [player_x], y: [player_y])" in game graphics as text.white
+
+Define action "Player Action":
+    If input is "Move Left":
+        Decrease player x by 1
+        Display "You moved left! Position: (x: [player_x], y: [player_y])" in console output as text.blue
+    Else if input is "Move Right":
+        Increase player x by 1
+        Display "You moved right! Position: (x: [player_x], y: [player_y])" in console output as text.blue
+    Else if input is "Jump":
+        Display "You jumped!" in console output as text.yellow
+    Else:
+        Display "Invalid action. Try again." in console output as text.red
+
+Define action "Boss Attack":
+    If input is "Attack Boss":
+        If boss_health > 0:
+            Decrease boss_health by 20
+            Display "You attacked the boss! Boss health: [boss_health]" in console output as text.green
+            If boss_health <= 0:
+                Display "Boss defeated! Level Complete." in console output as text.blue
+                Call "Level Up"
+        Else:
+            Display "Boss is already defeated." in console output as text.red
+
+Define action "Boss Movement":
+    # Boss movement towards the player
+    If boss_x < player_x:
+        Increase boss_x by 1
+    Else if boss_x > player_x:
+        Decrease boss_x by 1
+    If boss_y < player_y:
+        Increase boss_y by 1
+    Else if boss_y > player_y:
+        Decrease boss_y by 1
+
+    # Boss attacks when close to player
+    If player_x == boss_x and player_y == boss_y:
+        Decrease health by 30
+        Display "Boss hit you! Health: [health]" in console output as text.red
+
+Define action "Level Up":
+    If score >= 50 and level == 1:
+        Set level to 2
+        Increase player speed or ability
+        Increase enemy difficulty
+        Display "Level 2 reached! New challenges ahead." in console output as text.green
+    Else if score >= 100 and level == 2:
+        Set level to 3
+        Display "Level 3 reached! Boss fight incoming." in console output as text.green
+        Call "Start Boss Fight"
+    
+Define action "Start Boss Fight":
+    If level == 3:
+        Display "Boss has appeared! Prepare to fight!" in console output as text.red
+        Set boss_health to 100
+        Display "Boss Health: [boss_health]" in console output as text.red
+        Display "Boss is at (x: 10, y: 10)" in game graphics as text.red
+        Call "Boss Movement"
+
+// --- End of advanced_game_with_boss_fights.prs ---
+
+// --- Start of egyptian_script.prs ---
+# egyptian_script.prs — English-to-Hieroglyphic Symbolic Transliteration
+
+Transliterate "ra" as "☀️"
+Transliterate "maat" as "⚖️"
+Transliterate "ankh" as "☥"
+Transliterate "osiris" as "𓁹"
+Transliterate "isis" as "𓇳"
+Transliterate "horus" as "𓅃"
+Transliterate "thoth" as "𓁟"
+Transliterate "ka" as "𓂓"
+Transliterate "ba" as "𓅓"
+Transliterate "khepri" as "𓆣"
+Transliterate "nehbet" as "𓆜"
+Transliterate "neter" as "𓊹"
+Transliterate "pharaoh" as "𓇓"
+Transliterate "temple" as "𓉐"
+
+If script style is "Egyptian":
+    Replace matched words with hieroglyphic symbols
+    Display using temple-inspired layout
+
+// --- End of egyptian_script.prs ---
+
+// --- Start of custom_plugin.prs ---
+
+# custom_plugin.prs — Example custom plugin for Prosodie+++
+
+Define custom action "lightning_strike":
+    Trigger on "stormy" mood
+    Action: "Flash lightning, shake screen"
+    Play sound: "assets/lightning.mp3"
+
+// --- End of custom_plugin.prs ---
+
+// --- Start of core.prs ---
+# Prosodie+++ Standard Library - core.prs
+
+# Built-in rituals, UI actions, logic patterns — defined in poetic syntax
+
+Define ritual "Awakening":
+    Speak: "Rise from slumber"
+    Repeat 3 times:
+        Echo "Awakened"
+
+Define template "basic_button":
+    Add button that says "Click Me"
+    When button is clicked, alert "Clicked!"
+
+Define logic "greeting":
+    If input "Name" is not empty,
+        Then display "Hello, [Name]!"
+
+Define chant "fire_call" in Sanskrit:
+    Chant: "agniṁ īḷe purohitaṁ"
+    Repeat 2 times:
+        Wait 1 second
+        Chant: "agniḥ śukraḥ"
+
+Define element "Sun Symbol":
+    Invoke glyph "𓇳"
+    Display with golden glow
+
+
+# ────────────────────────────────────────────────
+# Numeric Logic Module (Simple Algebra)
+
+Define logic "math_core":
+    Let a be 10
+    Let b be 5
+    Let sum be a plus b
+    Let diff be a minus b
+    Let prod be a times b
+    Let ratio be a divided by b
+    Display sum
+    Display diff
+    Display prod
+    Display ratio
+
+
+# ────────────────────────────────────────────────
+# Core Expansion — Loops, Symbol Binding, Soft Conditionals
+
+Define loop "star_count":
+    Let stars be 5
+    Repeat stars times:
+        Display "✨ A star shines"
+
+Define binding "light_symbols":
+    Bind "Hope" to "🕊️"
+    Bind "Wisdom" to "🦉"
+    Bind "Transformation" to "🦋"
+    Display "Symbols are ready for ritual use"
+
+Define conditional "heart_check":
+    If soul is not empty:
+        Display "The soul speaks"
+    Else:
+        Display "Silence holds potential"
+
+
+# ────────────────────────────────────────────────
+# Poetic Expression Feature
+
+Write poem "rebirth":
+    "The silence broke like morning light"
+    "From ash arose a winged insight"
+    "Each word a seed, each breath a flame"
+    "And I became my truest name"
+
+
+# ────────────────────────────────────────────────
+# Integration of Aura, Color, Mood, and Symbol UI
+
+Include "symbol_ui.prs"
+Include "aura_engine.prs"
+
+# Example usage of color and aura
+Set aura to blue
+The mirror is a breath of peace
+
+Set aura to gold
+The flame radiates divinity
+
+Set mood to "sunset reflection"
+The veil is a dream of twilight
+
+# Symbol UI in action
+The star is a shimmer of joy
+The path leads with rainbow light
+
+# Write poem using aura
+Write poem "illumination":
+    "The flame awakens in golden light"
+    "The mirror speaks beneath soft skies"
+    "With every hue, the truth ignites"
+    "In colors woven, spirit flies"
+
+
+# ────────────────────────────────────────────────
+# Symbolic Invocation: Chanting "Tablet" — Auto App Creator
+
+Chanting "Tablet":
+    Create app called "Tablet"
+    Set aura to gold
+    Set mood to "ritual clarity"
+    Add header: "Welcome to the Tablet"
+    Add section called "Scrolls":
+        "Here lie verses of vision, etched in code and clarity."
+    Add button: "Reveal Scroll"
+    Link to section "Scrolls"
+    Add footer: "© The Eternal Poets"
+    Save app as html
+    Publish app to folder "tablet_output/"
+
+
+# ────────────────────────────────────────────────
+# Mythical App Invocations
+
+Chanting "Temple":
+    Create app called "Temple"
+    Set mood to "sacred silence"
+    Set aura to gold
+    Add header: "Temple of Eternal Verse"
+    Add section called "Offerings":
+        "Leave a word, receive a blessing."
+    Add section called "Scrolls":
+        "Ancient poems sleep here, waiting to awaken."
+    Add button: "Begin Ritual"
+    Link to section "Scrolls"
+    Add footer: "Blessed be the reader"
+    Save app as html
+    Publish app to folder "temple_output/"
+
+Chanting "Garden":
+    Create app called "Garden"
+    Set mood to "floral serenity"
+    Set aura to green
+    Add header: "Garden of Growing Words"
+    Add section called "Bloom":
+        "Click a petal, reveal a verse."
+    Add button: "Enter Bloom"
+    Link to section "Bloom"
+    Add footer: "© 2025 Garden Spirits"
+    Save app as html
+    Publish app to folder "garden_output/"
+
+Chanting "Mirror":
+    Create app called "Mirror"
+    Set aura to silver
+    Set mood to "introspective mist"
+    Add header: "The Reflecting Pool"
+    Add input field named "thought"
+    Add section called "Echo":
+        "Your thought returns as reflection."
+    Add button: "Reflect"
+    Link to section "Echo"
+    Add footer: "You are the poem."
+    Save app as html
+    Publish app to folder "mirror_output/"
+
+
+# ────────────────────────────────────────────────
+# Additional Mythical Apps
+
+Chanting "Library":
+    Create app called "Library"
+    Set mood to "stillness of thought"
+    Set aura to purple
+    Add header: "Library of Forgotten Words"
+    Add section called "Shelves":
+        "Each scroll is a whisper waiting to be read."
+    Add section called "Codices":
+        "Poems, rituals, and glyphs archived in silence."
+    Add button: "Read the Scroll"
+    Link to section "Codices"
+    Add footer: "Return when the silence calls"
+    Save app as html
+    Publish app to folder "library_output/"
+
+Chanting "Dream":
+    Create app called "Dream"
+    Set mood to "nocturnal wonder"
+    Set aura to blue
+    Add header: "The Dreaming Gate"
+    Add section called "Visions":
+        "Fragments of thought coalesce into stars."
+    Add input field named "dream"
+    Add section called "Sleep":
+        "What you write may return to you."
+    Add button: "Enter the Gate"
+    Link to section "Visions"
+    Add footer: "Drift gently beyond"
+    Save app as html
+    Publish app to folder "dream_output/"
+
+
+# ────────────────────────────────────────────────
+# Custom Chant App Template Support
+
+Define chant "Sanctum":
+    Create app called "Sanctum"
+    Set aura to white
+    Set mood to "clarity of spirit"
+    Add header: "The Inner Sanctum"
+    Add section called "Meditations":
+        "Write your stillness. Read your peace."
+    Add input field named "meditation"
+    Add button: "Reflect Within"
+    Link to section "Meditations"
+    Add footer: "Sanctified in silence"
+    Save app as html
+    Publish app to folder "sanctum_output/"
+
+
+# ────────────────────────────────────────────────
+# High-Level Generator: Language App Maker
+
+Generate prosodie "language app maker":
+    Create app called "Language Creator"
+    Set aura to rainbow
+    Set mood to "creative bloom"
+    Add header: "Build Your Own Language App"
+    Add section called "Instructions":
+        "Define your words. Create phrases. Add translation rules."
+    Add input field named "word"
+    Add input field named "definition"
+    Add input field named "example"
+    Add section called "Preview":
+        "Watch your app form as you write."
+    Add button: "Generate Language App"
+    Link to section "Preview"
+    Add footer: "Prosodie empowers your expression."
+    Save app as html
+    Publish app to folder "language_app_output/"
+
+
+# ────────────────────────────────────────────────
+# Language App Maker — Extended Features
+
+Update app "Language Creator":
+    Add dropdown menu called "Select Language":
+        "English"
+        "Latin"
+        "Sumerian"
+        "Sanskrit"
+    Add button: "Export as .prs"
+    Add section called "Export":
+        "Your language app will be saved as a Prosodie+++ file."
+    Add footer: "You are the creator of tongues."
+
+
+# ────────────────────────────────────────────────
+# Language Selection Expansion — Classical Greek Variants
+
+Update app "Language Creator":
+    Extend dropdown "Select Language" with:
+        "Ancient Attic Greek"
+        "Koine Greek"
+        "Doric Greek"
+
+
+# ────────────────────────────────────────────────
+# Scroll Translation Command for Script Rendering
+
+Command "Translate scroll to":
+    If target is "Sumerian":
+        Apply script style: Sumerian
+        Convert all known words to cuneiform
+    If target is "Latin":
+        Apply script style: Latin
+        Convert to macron-marked Latin
+    If target is "Greek":
+        Apply script style: Hellenic
+        Convert to Greek letters
+    If target is "Sanskrit":
+        Apply script style: Sanskrit
+        Convert to Devanagari
+    If target is "Egyptian":
+        Apply script style: Egyptian
+        Replace with hieroglyphic symbols
+
+// --- End of core.prs ---
+
+// --- Start of enhanced_global_text_module.prs ---
+# enhanced_global_text_module.prs — Advanced Global Text Handling with Formatting, Animations, and Interactive Inputs
+
+# Define global module for handling "Text:" commands with advanced features
+Define module "text":
+    # Recognize Text: commands and display output accordingly
+    If command starts with "Text:":
+        Extract message from the command
+        Display message in the appropriate section (Console, UI, etc.)
+        Apply color and style: green, red, yellow, blue, purple based on context
+    
+    # Handle advanced text formatting
+    If input contains "Text:" and output_section is "Console":
+        Extract formatting option from command
+        Apply color: 
+            green: Success
+            red: Error
+            yellow: Warning
+            blue: Info
+            purple: Custom
+        If formatting includes "bold":
+            Apply bold styling to message
+        If formatting includes "italic":
+            Apply italic styling to message
+        If formatting includes "underline":
+            Apply underline styling to message
+
+    # Handle text animations
+    If input contains "Text:" and output_section is "UI":
+        If input includes "fade-in":
+            Apply fade-in animation to message
+        If input includes "slide-up":
+            Apply slide-up animation to message
+        If input includes "bounce":
+            Apply bounce animation to message
+
+# Example of handling Text in Console with custom styles and animations
+Generate prosodie "App with Interactive Text Handling":
+    Add section "Console Output":
+        Label: "Console logs"
+        Add button: "Run Text Command"
+    
+    Add section "UI Output":
+        Label: "User Interface Display"
+        Add button: "Show UI Text"
+    
+    Add section "Text Input":
+        Label: "Enter custom text"
+        Add text field for input (user input area)
+        Add button: "Submit Text"
+    
+    Add footer: "© Prosodie Studio"
+    Save app as html
+    Publish app to folder "output/"
+
+# Define actions to run and customize text display
+Define action "Run Text Command":
+    If input starts with "Text:":
+        Extract message and formatting from the command
+        If input contains "Display message":
+            Display "Text displayed in console" as text.green
+        Else if input contains "Error occurred":
+            Display "Text displayed as error" as text.red
+        Else if input contains "warning":
+            Display "Text displayed as warning" as text.yellow
+        Else:
+            Display "Text command not recognized" in console output as text.yellow
+
+Define action "Show UI Text":
+    If input starts with "Text:":
+        Display message in UI with custom style
+        Apply color and style based on input (green, red, yellow, purple)
+
+Define action "Submit Text":
+    If input in "Text Input" contains "fade-in":
+        Display message with fade-in effect
+    Else if input in "Text Input" contains "bounce":
+        Display message with bounce effect
+    Else:
+        Display message normally
+
+// --- End of enhanced_global_text_module.prs ---
+
+// --- Start of global_text_module.prs ---
+# global_text_module.prs — Global Support for Text: Command in Prosodie+++
+
+# Define global module for handling "Text:" commands across all modules
+Define module "text":
+    # Recognize Text: commands and display output accordingly
+    If command starts with "Text:":
+        Extract message from the command
+        Display message in the appropriate section (Console, UI, etc.)
+        Apply color and style: green, red, yellow based on context
+    
+    # Example of handling Text in Console
+    If input contains "Text:" and output_section is "Console":
+        Display message as text.green (for success)
+        Display message as text.red (for error)
+        Display message as text.yellow (for warning)
+
+# Example of integrating Text: command within an app:
+Generate prosodie "App with Dynamic Text Output":
+    Add section "Console Output":
+        Label: "Console logs"
+        Add button: "Run Text Command"
+    
+    Add section "Message Display":
+        Text: "Hello, world!"
+
+    Add footer: "© Prosodie Studio"
+    Save app as html
+    Publish app to folder "output/"
+
+# Define a simple action to run the command
+Define action "Run Text Command":
+    If input starts with "Text:":
+        Display "Text command executed successfully" in console output as text.green
+    Else:
+        Display "Command not recognized" in console output as text.red
+
+// --- End of global_text_module.prs ---
+
+// --- Start of game_with_graphics_and_levels.prs ---
+# game_with_graphics_and_levels.prs — Expanded Game Logic with Player Movement, Levels, and Graphics
+
+Generate prosodie "Interactive Game with Levels and Movement":
+    Create app called "Prosodie Game with Levels"
+    Set aura to "dark"
+    Set mood to "adventure"
+
+    Add section called "Game Status":
+        Label: "Game Status"
+        Display "Score: 0 | Level: 1"
+    
+    Add section called "Console Output":
+        Label: "Console"
+        Add text field for game actions (e.g., "Move Left", "Move Right", "Jump")
+    
+    Add button: "Start Game"
+    Add button: "End Game"
+    
+    Add footer: "© Prosodie Game Studio"
+    Save app as html
+    Publish app to folder "game_output/"
+
+    Add section called "Game Graphics":
+        Label: "Player Position"
+        Display "Player is at (x: 0, y: 0)"
+        Add graphical representation of player (e.g., a symbol or shape in a grid)
+
+# Define actions for the buttons and game flow
+Define action "Start Game":
+    Set "Game Status" to "Game Started!"
+    Initialize score as 0
+    Initialize level as 1
+    Initialize player position as (0, 0)
+    Display "Game Started! Type 'Move Left', 'Move Right', or 'Jump' to play." in console output as text.green
+    Display "Player is at (x: 0, y: 0)" in game graphics as text.white
+
+Define action "End Game":
+    Display "Game Over! Your score is [score] and you reached level [level]." in console output as text.red
+    Set "Game Status" to "Game Over"
+    Display "Player's final position: (x: [player_x], y: [player_y])" in game graphics as text.white
+
+Define action "Player Action":
+    If input is "Move Left":
+        Decrease player x by 1
+        Increase score by 10
+        Update player position in graphics
+        Display "You moved left! Score: [score] | Position: (x: [player_x], y: [player_y])" in console output as text.blue
+    Else if input is "Move Right":
+        Increase player x by 1
+        Increase score by 10
+        Update player position in graphics
+        Display "You moved right! Score: [score] | Position: (x: [player_x], y: [player_y])" in console output as text.blue
+    Else if input is "Jump":
+        Increase score by 5
+        Display "You jumped! Score: [score]" in console output as text.yellow
+    Else:
+        Display "Invalid action. Try again." in console output as text.red
+
+Define action "Level Up":
+    If score >= 50 and level == 1:
+        Set level to 2
+        Increase player speed or ability
+        Display "Level 2 reached! New challenges ahead." in console output as text.green
+    Else if score >= 100 and level == 2:
+        Set level to 3
+        Display "Level 3 reached! You're almost there!" in console output as text.green
+
+// --- End of game_with_graphics_and_levels.prs ---
+
+// --- Start of engine.prs ---
+# engine.prs — Minimal Self-Interpreting Runtime for Prosodie+++
+
+Define engine "ProsodieRunner":
+    On load:
+        Read file with extension ".prs"
+        Parse line by line:
+            If line starts with "Create app called":
+                Initialize app shell
+            If line starts with "Set aura to":
+                Apply visual theme
+            If line starts with "Set mood to":
+                Style background + tone
+            If line starts with "Add section":
+                Create section with name and content
+            If line starts with "Add button":
+                Create clickable element
+            If line starts with "Add input field":
+                Insert interactive field
+            If line starts with "Display":
+                Render poetic or symbolic output
+            If line starts with "Save app as html":
+                Export entire app to HTML
+            If line starts with "Publish app to folder":
+                Move HTML to specified directory
+        End parse
+    Display "App loaded and interpreted via ProsodieRunner."
+
+// --- End of engine.prs ---
+
+// --- Start of extended_color_commands_global_text_module.prs ---
+# extended_color_commands_global_text_module.prs — Support for Additional Color Commands
+
+# Define global module for handling "Text:" commands with extended color customization
+Define module "text":
+    # Recognize Text: commands and display output accordingly
+    If command starts with "Text:":
+        Extract message from the command
+        Display message in the appropriate section (Console, UI, etc.)
+        Apply color and style: green, red, yellow, blue, purple, orange, pink, magenta based on context
+    
+    # Handle advanced text formatting
+    If input contains "Text:" and output_section is "Console":
+        Extract formatting option from command
+        Apply color: 
+            red: Success
+            green: Error
+            blue: Info
+            purple: Custom
+            orange: Highlighted
+            pink: Bold emphasis
+            magenta: Special
+            yellow: Warning
+        If formatting includes "bold":
+            Apply bold styling to message
+        If formatting includes "italic":
+            Apply italic styling to message
+        If formatting includes "underline":
+            Apply underline styling to message
+    
+    # Handle text animations
+    If input contains "Text:" and output_section is "UI":
+        If input includes "fade-in":
+            Apply fade-in animation to message
+        If input includes "slide-up":
+            Apply slide-up animation to message
+        If input includes "bounce":
+            Apply bounce animation to message
+
+    # Handle custom color commands
+    If input contains "Text:" and color command exists:
+        If color command is "red":
+            Apply red color to message
+        If color command is "green":
+            Apply green color to message
+        If color command is "blue":
+            Apply blue color to message
+        If color command is "purple":
+            Apply purple color to message
+        If color command is "yellow":
+            Apply yellow color to message
+        If color command is "orange":
+            Apply orange color to message
+        If color command is "pink":
+            Apply pink color to message
+        If color command is "magenta":
+            Apply magenta color to message
+        Else:
+            Display "Unsupported color command" as text.red
+
+# Example of handling Text in Console with extended color commands and animations
+Generate prosodie "App with Extended Color Handling":
+    Add section "Console Output":
+        Label: "Console logs"
+        Add button: "Run Text Command"
+    
+    Add section "UI Output":
+        Label: "User Interface Display"
+        Add button: "Show UI Text"
+    
+    Add section "Text Input":
+        Label: "Enter custom text"
+        Add text field for input (user input area)
+        Add button: "Submit Text"
+    
+    Add footer: "© Prosodie Studio"
+    Save app as html
+    Publish app to folder "output/"
+
+# Define actions to run and customize text display
+Define action "Run Text Command":
+    If input starts with "Text:":
+        Extract message and formatting from the command
+        If input contains "Display message":
+            Display "Text displayed in console" as text.green
+        Else if input contains "Error occurred":
+            Display "Text displayed as error" as text.red
+        Else if input contains "warning":
+            Display "Text displayed as warning" as text.yellow
+        Else:
+            Display "Text command not recognized" in console output as text.yellow
+
+Define action "Show UI Text":
+    If input starts with "Text:":
+        Display message in UI with custom style
+        Apply color and style based on input (green, red, yellow, purple, orange, pink, magenta)
+
+Define action "Submit Text":
+    If input in "Text Input" contains "fade-in":
+        Display message with fade-in effect
+    Else if input in "Text Input" contains "bounce":
+        Display message with bounce effect
+    Else:
+        Display message normally
+
+// --- End of extended_color_commands_global_text_module.prs ---
+
+// --- Start of latin_script.prs ---
+# latin_script.prs — Automatic English-to-Classical Latin Rendering
+
+Transliterate "veritas" as "vērĭtās"
+Transliterate "spiritus" as "spīrĭtŭs"
+Transliterate "anima" as "ănĭmă"
+Transliterate "corpus" as "cŏrpŭs"
+Transliterate "vita" as "vīta"
+Transliterate "lux" as "lūx"
+Transliterate "mortis" as "mŏrtĭs"
+Transliterate "sapientia" as "sapĭēntĭă"
+Transliterate "pax" as "pāx"
+Transliterate "deus" as "dĕŭs"
+Transliterate "terra" as "tĕrră"
+Transliterate "ignis" as "ĭgnĭs"
+
+# Rendering instruction
+If script style is "Latin":
+    Replace matched words with marked Latin equivalents
+    Display using Roman script with macrons and breves
+
+// --- End of latin_script.prs ---
+
+// --- Start of phonetic_script.prs ---
+# phonetic_script.prs — Automatic English-to-Greek Script Conversion
+
+Transliterate "logos" as "λόγος"
+Transliterate "theos" as "θεός"
+Transliterate "agape" as "ἀγάπη"
+Transliterate "kosmos" as "κόσμος"
+Transliterate "doxa" as "δόξα"
+Transliterate "pneuma" as "πνεῦμα"
+Transliterate "zoe" as "ζωή"
+Transliterate "aletheia" as "ἀλήθεια"
+Transliterate "kardia" as "καρδία"
+Transliterate "sophia" as "σοφία"
+Transliterate "phos" as "φῶς"
+Transliterate "anthropos" as "ἄνθρωπος"
+Transliterate "basileia" as "βασιλεία"
+Transliterate "grapho" as "γράφω"
+Transliterate "ekklesia" as "ἐκκλησία"
+
+# Add support for poetic script rendering
+If script style is "Hellenic":
+    Replace matched words with Greek equivalents
+    Display using Greek script
+
+// --- End of phonetic_script.prs ---
+
+// --- Start of prosodie_ide.prs ---
+# prosodie_ide.prs — Self-contained IDE Builder for Prosodie+++
+
+Generate prosodie "ide":
+    Create app called "Prosodie Studio"
+    Set aura to rainbow
+    Set mood to "creative bloom"
+
+    Add header: "Prosodie Studio — Language of Light"
+
+    Add section called "Code Panel":
+        "Write your poetic code here."
+        Add input field named "poem_editor"
+
+    Add section called "Live Preview":
+        "Your words become UI as you type."
+        Display rendered output of "poem_editor"
+
+    Add section called "Tools":
+        Add button: "Scan Meter"
+        Add button: "Translate Scroll"
+        Add button: "Export .prs"
+
+    Add section called "Aura Selector":
+        Add color options:
+            "Orange"
+            "Magenta"
+            "Red"
+            "Green"
+            "Rainbow"
+
+    Add section called "Script Style":
+        Add toggle for:
+            "Latin"
+            "Greek"
+            "Sanskrit"
+            "Sumerian"
+            "Egyptian"
+
+    Add footer: "© Prosodie+++, Born of Ritual Code"
+    Save app as html
+    Publish app to folder "ide_output/"
+
+// --- End of prosodie_ide.prs ---
+
+// --- Start of sanskrit_script.prs ---
+# sanskrit_script.prs — Phonetic Sanskrit Transliteration to Devanagari
+
+Transliterate "atman" as "आत्मन्"
+Transliterate "shanti" as "शान्ति"
+Transliterate "karma" as "कर्म"
+Transliterate "dharma" as "धर्म"
+Transliterate "moksha" as "मोक्ष"
+Transliterate "bhakti" as "भक्ति"
+Transliterate "prakriti" as "प्रकृति"
+Transliterate "purusha" as "पुरुष"
+Transliterate "agni" as "अग्नि"
+Transliterate "deva" as "देव"
+Transliterate "manas" as "मनस्"
+Transliterate "soma" as "सोम"
+Transliterate "tapas" as "तपस्"
+Transliterate "jyoti" as "ज्योति"
+
+If script style is "Sanskrit":
+    Replace matched words with Devanagari equivalents
+    Display using classical Sanskrit formatting
+
+// --- End of sanskrit_script.prs ---
+
+// --- Start of legacy_support.prs ---
+# legacy_support.prs — Handles Backwards Compatibility
+
+If file extension is ".txt" or ".scroll":
+    Read as Prosodie+++ plain scroll
+    Parse poetic structure
+
+If file extension is ".html" or ".css":
+    Treat as visual layer
+    Allow Include "filename.html"
+
+If line contains deprecated keyword:
+    Log as ➕ (Legacy): [keyword]
+    Suggest: Convert to supported command
+
+Support legacy chant names:
+    "Summon app" = "Chanting"
+    "Invoke design" = "Create app called"
+
+// --- End of legacy_support.prs ---
+
+// --- Start of run_code_tab_ide.prs ---
+# run_code_tab_ide.prs — IDE with "Run Code" tab functionality for real-time code execution
+
+Generate prosodie "Run Code IDE":
+    Create app called "Code Runner"
+    Set aura to "dark"
+    Set mood to "focused"
+
+    Add section called "Code Input":
+        Label: "Enter your code here"
+        Add text field for code input (code editor area)
+
+    Add section called "Run Code":
+        Add button: "Execute Code"
+        Label: "Run the code to see the output"
+
+    Add section called "Console Output":
+        Label: "Console logs"
+        Display color-coded feedback:
+            "text.green: Success"
+            "text.red: Error"
+            "text.yellow: Warning"
+
+    Add footer: "© Prosodie Studio"
+    Save app as html
+    Publish app to folder "output/"
+
+# Define action to run code entered by the user
+Define action "Execute Code":
+    If input is "hello":
+        Display "Hello, world!" in console output as text.green
+    Else if input is "error":
+        Display "Something went wrong!" in console output as text.red
+    Else if input contains "warning":
+        Display "This is a warning!" in console output as text.yellow
+    Else:
+        Display "Command not recognized." in console output as text.yellow
+
+// --- End of run_code_tab_ide.prs ---
+
+// --- Start of sitebuilder.prs ---
+# sitebuilder.prs — Poetic Website Builder for Prosodie+++
+
+Create website called "Starlight"
+Set theme to "twilight wonder"
+Set aura to magenta
+
+Add header: "Welcome to the Light"
+
+Add menu:
+    "Flow"
+    "About"
+    "Rituals"
+
+Add section called "About":
+    "We are seekers of rhythm, shapers of soul."
+
+Add section called "Rituals":
+    "Here you will find ceremonies in verse and silence."
+
+Add button: "Enter the Garden"
+Link to section "Rituals"
+
+Add footer: "© 2025 The Fluxus Temple"
+
+Save site as html
+Publish website to folder "output/"
+
+
+# ────────────────────────────────────────────────
+# Upload Button Support for Website Creation
+
+Add upload button:
+    Label: "Upload your logo"
+    Accepts: ".png .jpg .svg"
+    Store as: "logo"
+
+// --- End of sitebuilder.prs ---
+
+// --- Start of text_cleaner.prs ---
+# text_cleaner.prs — Automatically Parse and Clean Up Book Files
+
+Parse book "my_book.txt":
+    Remove unnecessary footnotes
+    Remove unwanted headers/footers
+    Normalize text spacing
+    Split into chapters based on keywords: "Chapter", "Part", etc.
+    Save cleaned file as "cleaned_book.txt"
+    
+# Remove footnotes (anything inside square brackets or parentheses)
+Remove "footnotes" from file:
+    Find patterns: "[...]" and "(...)" 
+    Strip out content
+
+# Normalize text (fix spacing and remove extra whitespace)
+Normalize text spacing:
+    Remove double spaces
+    Trim empty lines
+    Align text to paragraphs
+
+# Split into chapters (based on keywords like "Chapter", "Part")
+Split into chapters:
+    Find keywords: "Chapter", "Part"
+    Define chapter breaks based on these keywords
+    Assign titles accordingly
+
+# Save the cleaned version
+Save as "cleaned_book.txt"
+
+// --- End of text_cleaner.prs ---
