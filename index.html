@@ -12,9 +12,16 @@
             <h1>Welcome to Prosodie++ IDE</h1>
         </header>
 
-        <!-- Monaco Editor Section -->
-        <div id="editor-container">
-            <div id="editor"></div>  <!-- Monaco Editor will be injected here -->
+        <!-- Writing Tab -->
+        <div id="writing-tab">
+            <h2>Write Your Poem</h2>
+            <textarea id="poem-textarea" placeholder="Write your poem here..."></textarea>
+            <div id="writing-controls">
+                <button id="save-poem" class="control-btn">Save Poem</button>
+                <button id="clear-poem" class="control-btn">Clear</button>
+            </div>
+            <h3>Saved Poems:</h3>
+            <div id="saved-poems"></div>
         </div>
 
         <!-- Control Buttons -->
